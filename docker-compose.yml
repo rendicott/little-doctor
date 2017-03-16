@@ -1,0 +1,11 @@
+version: '2'
+services:
+  little-doctor-server:
+    build: ./little-server
+    entrypoint: ["/bin/bash"]
+  little-doctor-client:
+    build: ./little-client
+    expose:
+      - 80
+      - 22
+    entrypoint: ["service nginx start && tail -f /var/log/nginx/access.log"]
