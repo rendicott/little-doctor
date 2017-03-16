@@ -3,9 +3,13 @@ services:
   little-doctor-server:
     build: ./little-server
     entrypoint: ["/bin/bash"]
+    stdin_open: true
+    tty: true
   little-doctor-client:
     build: ./little-client
     expose:
-      - 80
+      - 8080
       - 22
-    entrypoint: ["service nginx start && tail -f /var/log/nginx/access.log"]
+    entrypoint: ["/app/main"]
+    depends_on:
+      - "little-doctor-server"
