@@ -21,10 +21,15 @@ RUN touch /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
 RUN cat /root/client-key.pub /root/.ssh/authorized_keys
 
+WORKDIR /tmp/
+ADD scripts /tmp/
+RUN /tmp/redis-prereqs.sh
+
 RUN mkdir /app
+WORKDIR /app
 ADD /app/MathApp /app/MathApp
 ADD /app/MathApp/views /app/views
 ADD /app/MathApp/conf /app/conf
-WORKDIR /app
 RUN go build /app/MathApp/main.go
+
 ENTRYPOINT /app/main

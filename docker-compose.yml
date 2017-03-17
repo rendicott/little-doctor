@@ -1,10 +1,17 @@
 version: '2'
 services:
+  little-doctor-redis:
+    build: ./little-redis
+    entrypoint: ["/usr/bin/redis-server"]
+    expose:
+      - 6379
   little-doctor-server:
     build: ./little-server
     entrypoint: ["/bin/bash"]
     stdin_open: true
     tty: true
+    depends_on:
+      - "little-doctor-redis"
   little-doctor-client:
     build: ./little-client
     expose:
