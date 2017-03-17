@@ -9,5 +9,7 @@ ENV no_proxy "localhost,127.0.0.1,ge.com,3.0.0.0/8,10.0.0.0/8"
 RUN yum install epel-release -y
 RUN yum install redis -y
 EXPOSE 6379
+WORKDIR /tmp
 ADD launch-redis.sh /tmp/
-#ENTRYPOINT ["/tmp/launch-redis.sh"]
+RUN ./launch-redis.sh
+ENTRYPOINT ["/usr/bin/redis-server","/etc/redis.conf"]

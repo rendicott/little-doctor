@@ -32,4 +32,4 @@ ADD /app/MathApp/views /app/views
 ADD /app/MathApp/conf /app/conf
 RUN go build /app/MathApp/main.go
 
-ENTRYPOINT /app/main
+ENTRYPOINT "/tmp/post-ip-to-redis 172.17.0.1 6379 && /app/main"

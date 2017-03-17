@@ -2,7 +2,7 @@ version: '2'
 services:
   little-doctor-redis:
     build: ./little-redis
-    entrypoint: ["/usr/bin/redis-server"]
+    entrypoint: ["/usr/bin/redis-server","/etc/redis.conf"]
     expose:
       - 6379
   little-doctor-server:
@@ -12,11 +12,15 @@ services:
     tty: true
     depends_on:
       - "little-doctor-redis"
+    links:
+      - "little-doctor-redis:redserver"
   little-doctor-client:
     build: ./little-client
     expose:
       - 8080
       - 22
-    entrypoint: ["/app/main"]
+    entrypoint: "/tmp/launcher.sh"
+    links:
+      - "little-doctor-redis:redserver"
     depends_on:
-      - "little-doctor-server"
+      - "little-doctor-redis"

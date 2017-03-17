@@ -7,6 +7,9 @@ ENV no_proxy "localhost,127.0.0.1,ge.com,3.0.0.0/8,10.0.0.0/8"
 RUN yum install epel-release -y
 RUN yum install ansible -y
 RUN yum install net-tools -y
+RUN yum install python-pip -y
+RUN pip install redis
 RUN mkdir /usr/ansible
 WORKDIR /usr/ansible
+ADD /scripts/ansible-inventory.py /usr/ansible
 ENTRYPOINT ["/bin/bash"]

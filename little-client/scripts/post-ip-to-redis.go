@@ -31,7 +31,7 @@ func getIp() string {
 
 func redisPost(ip, rip, rport string) {
 	client := redis.NewClient(&redis.Options{
-        Addr:     rip + ":" rport,
+        Addr:     rip + ":" + rport,
         Password: "", // no password set
         DB:       0,  // use default DB
     })
@@ -50,7 +50,8 @@ func redisPost(ip, rip, rport string) {
 func main() {
 	redisIp := os.Args[1]
 	redisPort := os.Args[2]
+	fmt.Println("Pushing to " + redisIp)
 	ip := getIp()
 	fmt.Println("IP ADDR IS : " + ip)
-    redisPost(ip)
+    redisPost(ip, redisIp, redisPort)
 	}
