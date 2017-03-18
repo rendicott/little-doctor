@@ -10,6 +10,12 @@ RUN yum install net-tools -y
 RUN yum install python-pip -y
 RUN pip install redis
 RUN mkdir /usr/ansible
+RUN yum install openssh -y
+RUN ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
+ADD /keys/client-key.priv /root/.ssh/id_rsa
 WORKDIR /usr/ansible
 ADD /scripts/ansible-inventory.py /usr/ansible
+ADD /scripts/ansible.cfg /etc/ansible/ansible.cfg
+RUN yum install which -y
+RUN yum install openssh-clients -y
 ENTRYPOINT ["/bin/bash"]

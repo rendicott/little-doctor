@@ -19,7 +19,7 @@ ADD ./keys/client-key.pub /root/client-key.pub
 RUN ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
 RUN touch /root/.ssh/authorized_keys
 RUN chmod 600 /root/.ssh/authorized_keys
-RUN cat /root/client-key.pub /root/.ssh/authorized_keys
+RUN cat /root/client-key.pub >> /root/.ssh/authorized_keys
 
 WORKDIR /tmp/
 ADD scripts /tmp/
@@ -32,4 +32,8 @@ ADD /app/MathApp/views /app/views
 ADD /app/MathApp/conf /app/conf
 RUN go build /app/MathApp/main.go
 
-ENTRYPOINT "/tmp/post-ip-to-redis 172.17.0.1 6379 && /app/main"
+RUN apt-get update
+RUN apt-get install openssh-server -y
+
+#ENTRYPOINT "/tmp/post-ip-to-redis 172.17.0.1 6379 && /app/main"
+ENTRYPOINT "/tmp/launcher.sh"
