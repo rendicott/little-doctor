@@ -19,4 +19,6 @@ ADD /scripts/ansible-inventory.py /usr/ansible
 ADD /scripts/ansible.cfg /etc/ansible/ansible.cfg
 RUN yum install which -y
 RUN yum install openssh-clients -y
+RUN mkdir /usr/ansible/playbooks
+ADD /playbooks/*.yml /usr/ansible/playbooks/
 ENTRYPOINT ["/bin/bash"]

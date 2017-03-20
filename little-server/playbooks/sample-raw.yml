@@ -1,0 +1,14 @@
+# sample playbook to show how to do raw commands against hosts
+
+# Usage:
+#   ansible-playbook -e targets=all sample-raw.yml
+---
+- name: Do raw
+  hosts: "{{ targets }}"
+  connection: smart
+  gather_facts: false
+  remote_user: root
+  tasks:
+    - name: Run a raw command
+      raw: 'who && hostname'
+...
