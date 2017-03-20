@@ -24,3 +24,14 @@ services:
       - "little-doctor-redis:redserver"
     depends_on:
       - "little-doctor-redis"
+  little-doctor-client-centos:
+    build: ./little-client-centos
+    expose:
+      - 8080
+      - 22
+    entrypoint: "/tmp/launcher.sh"
+    links:
+      - "little-doctor-redis:redserver"
+    depends_on:
+      - "little-doctor-redis"
+
