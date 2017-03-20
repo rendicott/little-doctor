@@ -4,6 +4,10 @@ An Ansible server with a client node that can be multiplied to test Ansible agai
 
 ![docker-compose scale ansible](./img/dc-scale.png?raw=true "Scaling docker clients for use with ansible")
 
+Concept Diagram
+
+![docker-compose ansible diagram](./img/dc-concept-diagram.png?raw=true "Diagram of the Ansible server/client environment")
+
 ## Usage
 
 Build then run like so
