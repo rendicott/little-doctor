@@ -13,6 +13,7 @@ RUN mkdir /usr/ansible
 RUN yum install openssh -y
 RUN ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
 ADD /keys/client-key.priv /root/.ssh/id_rsa
+ADD /keys/client-key.pub /root/.ssh/id_rsa.pub
 WORKDIR /usr/ansible
 ADD /scripts/ansible-inventory.py /usr/ansible
 ADD /scripts/ansible.cfg /etc/ansible/ansible.cfg

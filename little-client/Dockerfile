@@ -34,6 +34,6 @@ RUN go build /app/MathApp/main.go
 
 RUN apt-get update
 RUN apt-get install openssh-server -y
-
+RUN apt-get install vim -y
 #ENTRYPOINT "/tmp/post-ip-to-redis 172.17.0.1 6379 && /app/main"
 ENTRYPOINT "/tmp/launcher.sh"
