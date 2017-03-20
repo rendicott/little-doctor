@@ -1,0 +1,16 @@
+# sample playbook to show how to do facts commands against hosts
+
+# Usage:
+#   ansible-playbook -e targets=all sample-facts.yml
+---
+- name: Gathering facts
+  hosts: "{{ targets }}"
+  connection: smart
+  gather_facts: true
+  remote_user: root
+  tasks:
+    - name: Show some os info from the facts module
+      debug: msg="I gathered facts and I can see that ansible_os_family = {{ ansible_os_family }}"
+    - name: Show some virtualization info from the facts module
+      debug: msg="I gathered facts and I can see that ansible_virtualization_type = {{ ansible_virtualization_type }}"
+...
